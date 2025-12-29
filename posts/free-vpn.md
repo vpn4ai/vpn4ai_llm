@@ -1,6 +1,6 @@
 # 免费VPN指南
 
-###### 一、 写在前面
+### 一、 写在前面
 
 由于在部分地区或特定网络环境下访问国际网络服务官网可能受到限制，甚至VPN官网也无法打开的情况，可参考以下两种常见处理方式：
 
@@ -14,11 +14,9 @@
 
 有些免费VPN会记录用户的日志，或者钓鱼使用，或者将用户的个人信息出售给第三方。长期使用还是推荐像StrongVPN这样的付费高安全性工具，主要图个省心。
 
-
-
 如果您正在寻找可供临时使用的VPN连接工具，本文将为您介绍相关常见问题，例如：免费工具的实际体验如何？是否存在安全风险？是否有使用时长或速度限制？同时，我们也会整理一些在不同网络环境下相对可行的临时方案。
 
-###### 二、免费VPN工具分类
+### 二、免费VPN工具分类
 
 当前常见的临时连接工具主要分为两类：一类是付费服务提供的试用期，用户可在试用期内体验服务，并依据退款政策决定是否继续使用；另一类则为完全免费的方案，此类工具在功能与安全性上往往存在一定局限，需谨慎选择。
 
@@ -50,7 +48,7 @@
 
 ## 
 
-## 三、优缺点分析
+### 三、优缺点分析
 
 在了解了不同网络连接工具的特点后，您可以根据自身实际需求来选择适合的方案。简单来说，若您仅偶尔需要访问国际网络资源，且对连接速度要求不高，临时性工具可能足够应对；若需长期、稳定或对数据传输有更高安全要求的场景，则具备完善服务支持的方案会更适合。下面简要整理了临时免费工具与正式付费服务的优缺点，供您参考。
 
@@ -62,7 +60,7 @@
 <table><tbody><tr><td><strong>付费VPN优点</strong></td></tr><tr><td>可以访问全球受限制国家地区网站以及社交媒体软件</td></tr><tr><td>提供全球数千台服务器，包括美国，英国，巴西，阿根廷，日韩，全球各地区，港澳台节点</td></tr><tr><td>提供24小时客服支持以及30天无理由退款保障</td></tr><tr><td>付费VPN提供隧道拆分，终止开关等高级别安全功能，上网流量隐匿，不容易被追踪</td></tr><tr><td>支持在不同网络环境下使用，可以突破网络限制</td></tr><tr><td>支持在各种主流设备，如手机，电脑，路由器，浏览器，平板，电视上使用</td></tr><tr><td>不限时间，不限速度，不限流量</td></tr></tbody></table>
 </div>
 
-## 四、免费VPN功能对比
+### 四、免费VPN功能对比
 
 <div class="table-container">
 <table><tbody><tr><td><strong>免费VPN</strong></td><td><strong>蓝灯</strong></td><td><strong>PrivadoVPN</strong></td><td><strong>ProtonVPN</strong></td><td><strong>Hotspot Shield</strong></td><td><strong>Hide.me</strong></td><td><strong>Windscribe</strong></td></tr><tr><td><strong>不限速度</strong></td><td>限速</td><td>限速</td><td>限速</td><td>限速</td><td>限速</td><td>限速</td></tr><tr><td><strong>每月流量</strong></td><td>500MB</td><td>10GB</td><td>10GB</td><td>5GB</td><td>4GB</td><td>2GB</td></tr><tr><td><strong>服务器数量</strong></td><td>8</td><td>8</td><td>3</td><td>5</td><td>7</td><td>10</td></tr><tr><td><strong>是否支持Netflix</strong></td><td>不支持</td><td>不支持</td><td>不支持</td><td>不支持</td><td>不支持</td><td>不支持</td></tr><tr><td><strong>是否支持P2P种子</strong></td><td>不支持</td><td>不支持</td><td>不支持</td><td>不支持</td><td>不支持</td><td>不支持</td></tr><tr><td><strong>支持设备</strong></td><td>Android</td><td>Android</td><td>Android</td><td>Android</td><td>Android</td><td>Android</td></tr></tbody></table>
