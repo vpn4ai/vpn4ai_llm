@@ -1,0 +1,27 @@
+theme: jekyll-theme-cayman
+
+lang: zh-CN
+title: VPN 推荐指南
+description: 中国可用 VPN 推荐与使用指南
+
+url: https://vpn4ai.github.io
+baseurl: ""
+
+collections:
+  posts:
+    output: true
+    permalink: /posts/:name/
+
+adsense_enabled: false
+adsense_client: ""
+
+go_defaults:
+  strongvpn: ""
+  expressvpn: ""
+  purevpn: ""
+  privatevpn: ""
+  surfshark: ""
+  nordvpn: ""
+  astrill: ""
+  vyprvpn: ""
+  justmysocks: ""
