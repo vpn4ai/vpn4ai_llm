@@ -25,7 +25,7 @@
 目前市场上多数付费VPN提供试用机制，周期一般在7至45天不等。用户可在试用期内体验完整功能，例如不限带宽、支持高清影音播放及多设备连接等，部分服务还允许用户在试用结束后根据政策申请退款。以下为几款提供试用期的服务参考：
 
 - [StrongVPN]({{ '/go/strongvpn' | relative_url }})：免费使用30天，连接速度与稳定性表现突出（效果可能因地区与网络环境而异）
-- [PureVPN]({{ '/go/purevpn' | relative_url }})：免费使用31天，适合有流媒体访问需求的用户参考，支持P2P共享，提供专用IP地址
+- <a href="{{ site.go_defaults.purevpn }}" target="_blank" rel="nofollow sponsored">PureVPN</a>：免费使用31天，适合有流媒体访问需求的用户参考，支持P2P共享，提供专用IP地址
 - [SurfShark]({{ '/go/surfshark' | relative_url }})：免费使用30天，支持无限制设备数量同时在线，提供私密浏览
 
 **2. 真正免费VPN工具**

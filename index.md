@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 2026年VPN推荐榜
-description: 2026年 VPN 评测与推荐，包含 StrongVPN、ExpressVPN、PureVPN、Surfshark 等实测对比与选购建议。
+description: 2026年 VPN 评测与推荐，包含 StrongVPN、NordVPN、PureVPN、Surfshark 等实测对比与选购建议。
 ---
 
 ## 目录
@@ -91,7 +91,7 @@ ExpressVPN 因其较高的连接稳定性和广泛的节点覆盖，受到不少
 
 <a id="purevpn"></a>
 
-#### **3. [PureVPN]({{ '/go/purevpn' | relative_url }}) 9.3分**
+#### **3. <a href="{{ site.go_defaults.purevpn }}" target="_blank" rel="nofollow sponsored">PureVPN</a> 9.3分**
 
 **功能全面，性价比最高**
 
@@ -146,7 +146,7 @@ PureVPN在全球多个国家和地区设有服务器，提供专用IP地址选�
 
 <a id="avoid"></a>
 
-### 三、⚠️避坑指南   --- 这些VPN不好用**
+### 三、⚠️避坑指南   --- 这些VPN不好用
 
 #### **1. PandaVPN**
 
