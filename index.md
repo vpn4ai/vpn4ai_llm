@@ -4,6 +4,15 @@ title: 2026年VPN推荐榜
 description: 2026年 VPN 评测与推荐，包含 PureVPN、StrongVPN、NordVPN、Surfshark 等实测对比与选购建议。
 ---
 
+<div style="margin: 14px 0; padding: 12px 14px; border: 1px solid rgba(0,0,0,0.12); border-radius: 8px; background: rgba(0,0,0,0.03);">
+  <div style="font-weight: 600; margin-bottom: 6px;">VPN 合规与用途说明</div>
+  <div style="line-height: 1.7;">
+    本站内容仅用于对 VPN/网络隐私工具的测评与信息参考，重点关注隐私保护、数据传输安全、公共 Wi-Fi 风险防护、远程办公与账号安全等合规用途。
+    不同国家与地区对 VPN 的监管要求存在差异，部分地区可能限制或监控相关使用行为；如对所在地法规不确定，请先自行确认并遵守。
+    需要特别说明：使用 VPN 并不会使任何违法行为变得合法。
+  </div>
+</div>
+
 ## 目录
 
 - [一、为什么需要跨境VPN](#why)
