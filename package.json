@@ -1,0 +1,12 @@
+{
+  "name": "vpn4ai-site",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "eleventy --serve --watch",
+    "build": "eleventy"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  }
+}
