@@ -6,6 +6,7 @@ layout: false
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {%- for item in collections.all -%}
   {%- set url = item.url -%}
+  {%- set permalink = (item.data and item.data.permalink) or '' -%}
   {%- if url
     and url != '/404.html' and url != '404.html'
     and url != '/sitemap.xml' and url != 'sitemap.xml'
@@ -14,9 +15,9 @@ layout: false
     and (url | slice(0, 8)) != '/assets/'
     and (not url.startsWith('/google'))
     and item.data
-    and item.data.permalink != '/sitemap.xml'
-    and item.data.permalink != '/robots.txt'
-    and (not item.data.permalink.startsWith('/google'))
+    and permalink != '/sitemap.xml'
+    and permalink != '/robots.txt'
+    and (not permalink.startsWith('/google'))
   -%}
 
   <url>

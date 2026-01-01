@@ -39,6 +39,10 @@
       <meta name="robots" content="index,follow" />
     {% endif %}
 
+    {% if page.url == '/' %}
+      <meta name="baidu-site-verification" content="codeva-fiSpow0Rsf" />
+    {% endif %}
+
     <link rel="canonical" href="{{ page.url | absoluteUrl(site.url) }}" />
 
     {% if hasEn %}
@@ -115,10 +119,6 @@
 
     <main id="content" class="main-content" role="main">
       {{ content | safe }}
-
-      <footer class="site-footer">
-        <span class="site-footer-credits">版权所有 <a href="/">{{ site.title }}</a>.</span>
-      </footer>
     </main>
 
     <script>
