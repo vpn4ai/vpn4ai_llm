@@ -14,10 +14,12 @@ layout: false
     and url != '/googlef79966437cc3e0e4.html' and url != 'googlef79966437cc3e0e4.html'
     and (url | slice(0, 8)) != '/assets/'
     and (not url.startsWith('/google'))
+    and (not url.startsWith('/baidu_verify'))
     and item.data
     and permalink != '/sitemap.xml'
     and permalink != '/robots.txt'
     and (not permalink.startsWith('/google'))
+    and (not permalink.startsWith('/baidu_verify'))
   -%}
 
   <url>
