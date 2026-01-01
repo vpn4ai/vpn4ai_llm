@@ -2,23 +2,23 @@
 {% set currentLang = lang or site.lang %}
 {% set canonicalPath = page.url | stripLangPrefix %}
 {% set enReadyPaths = [
-  '/recommend/',
+  '/vpn/recommend/',
   '/about/',
   '/disclaimer/',
   '/privacy/',
   '/contact/',
-  '/vpn-review-methodology/',
-  '/posts/nordvpn-review/',
-  '/posts/surfshark-review/',
-  '/posts/protonvpn-review/',
-  '/posts/purevpn-review/',
-  '/posts/expressvpn-review/',
-  '/posts/cyberghost-review/',
-  '/posts/pia-review/',
-  '/posts/ivacy-review/',
-  '/posts/mullvad-review/',
-  '/posts/strongvpn-review/',
-  '/posts/atlas-review/'
+  '/vpn/review-methodology/',
+  '/vpn/posts/nordvpn-review/',
+  '/vpn/posts/surfshark-review/',
+  '/vpn/posts/protonvpn-review/',
+  '/vpn/posts/purevpn-review/',
+  '/vpn/posts/expressvpn-review/',
+  '/vpn/posts/cyberghost-review/',
+  '/vpn/posts/pia-review/',
+  '/vpn/posts/ivacy-review/',
+  '/vpn/posts/mullvad-review/',
+  '/vpn/posts/strongvpn-review/',
+  '/vpn/posts/atlas-review/'
 ] %}
 {% set hasEn = canonicalPath in enReadyPaths %}
 <html lang="{{ currentLang }}">
@@ -105,7 +105,7 @@
       {% endif %}
 
       <nav class="nav">
-        <a class="btn" href="{{ '/recommend/' | withLangPrefix(currentLang) }}">{{ navHome }}</a>
+        <a class="btn" href="{{ '/vpn/recommend/' | withLangPrefix(currentLang) }}">{{ navHome }}</a>
         <a class="btn" href="{{ '/about/' | withLangPrefix(currentLang) }}">{{ navAbout }}</a>
         <a class="btn" href="{{ '/disclaimer/' | withLangPrefix(currentLang) }}">{{ navDisclaimer }}</a>
         <a class="btn" href="{{ '/privacy/' | withLangPrefix(currentLang) }}">{{ navPrivacy }}</a>
@@ -124,15 +124,18 @@
     <script>
       (function () {
         var supported = ["zh", "en"];
+        var canonicalPath = "{{ canonicalPath }}";
+        var enPrefix = canonicalPath && canonicalPath.indexOf("/vpn/") === 0 ? "/vpn/en" : "/en";
         var prefixMap = {
           "zh": "",
-          "en": "/en"
+          "en": enPrefix
         };
 
         var hasEn = {% if hasEn %}true{% else %}false{% endif %};
-        var canonicalPath = "{{ canonicalPath }}";
 
         function getPathWithoutLangPrefix(pathname) {
+          if (pathname === "/vpn/en" || pathname === "/vpn/en/") return "/vpn/";
+          if (pathname.indexOf("/vpn/en/") === 0) return "/vpn/" + pathname.slice(8);
           for (var i = 0; i < supported.length; i++) {
             var lang = supported[i];
             var prefix = prefixMap[lang];
@@ -145,6 +148,7 @@
         }
 
         function getLangFromPath(pathname) {
+          if (pathname === "/vpn/en" || pathname === "/vpn/en/" || pathname.indexOf("/vpn/en/") === 0) return "en";
           for (var i = 0; i < supported.length; i++) {
             var lang = supported[i];
             var prefix = prefixMap[lang];
@@ -174,7 +178,7 @@
           var basePath = getPathWithoutLangPrefix(location.pathname);
 
           if (targetLang === "en" && !hasEn) {
-            basePath = "/recommend/";
+            basePath = "/vpn/recommend/";
           }
 
           var prefix = prefixMap[targetLang] || "";

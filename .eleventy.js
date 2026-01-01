@@ -9,6 +9,8 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter("stripLangPrefix", function (pathname) {
     const p = pathname || "/";
+    if (p === "/vpn/en" || p === "/vpn/en/") return "/vpn/";
+    if (p.startsWith("/vpn/en/")) return `/vpn/${p.slice(8)}`;
     if (p === "/en" || p === "/en/") return "/";
     if (p.startsWith("/en/")) return p.slice(3);
     return p;
@@ -17,7 +19,11 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("withLangPrefix", function (pathname, lang) {
     const p = pathname || "/";
     const base = p.startsWith("/") ? p : `/${p}`;
-    if (lang === "en") return `/en${base === "/" ? "/" : base}`;
+    if (lang === "en") {
+      if (base === "/vpn/" || base === "/vpn") return "/vpn/en/";
+      if (base.startsWith("/vpn/")) return `/vpn/en${base.slice(4)}`;
+      return `/en${base === "/" ? "/" : base}`;
+    }
     return base;
   });
 
