@@ -118,12 +118,16 @@
     {% set footerPrivacy = 'privacy-policy' %}
     {% set footerDmca = 'DMCA' %}
     {% set footerAffiliate = 'Affiliate Disclosure' %}
+    {% set footerVpnRecommend = 'VPN 推荐' %}
+    {% set footerReviews = '评测文章' %}
     {% if currentLang == 'en' %}
       {% set footerTitle = 'Follow an1688' %}
       {% set footerTerms = 'Terms' %}
       {% set footerPrivacy = 'privacy-policy' %}
       {% set footerDmca = 'DMCA' %}
       {% set footerAffiliate = 'Affiliate Disclosure' %}
+      {% set footerVpnRecommend = 'VPN Recommendation' %}
+      {% set footerReviews = 'Reviews' %}
     {% endif %}
 
     <footer class="site-footer" role="contentinfo">
@@ -141,8 +145,8 @@
         <div class="site-footer-col">
           <div class="site-footer-heading">Links</div>
           <div class="site-footer-links">
-            <a href="{{ '/vpn/recommend/' | withLangPrefix(currentLang) }}">{{ currentLang == 'en' ? 'VPN Recommendation' : 'VPN 推荐' }}</a>
-            <a href="{{ '/vpn/posts/' | withLangPrefix(currentLang) }}">{{ currentLang == 'en' ? 'Reviews' : '评测文章' }}</a>
+            <a href="{{ '/vpn/recommend/' | withLangPrefix(currentLang) }}">{{ footerVpnRecommend }}</a>
+            <a href="{{ '/vpn/posts/' | withLangPrefix(currentLang) }}">{{ footerReviews }}</a>
           </div>
         </div>
 
