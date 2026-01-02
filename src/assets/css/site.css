@@ -74,17 +74,7 @@ body[data-canonical-path="/vpn/recommend/"] h2 {
   border-radius: 14px;
   overflow: hidden;
   border: 1px solid rgba(0,0,0,0.10);
-  background: linear-gradient(90deg, rgba(255,255,255,0.96), rgba(255,255,255,0.88));
-}
-
-.page-hero-banner::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("/assets/images/banner_vpn.jpg");
-  background-size: cover;
-  background-position: center;
-  opacity: 0.18;
+  background: #fff;
 }
 
 .page-hero-banner-inner {
@@ -523,6 +513,7 @@ blockquote {
 }
 
 .vpn-card {
+  position: relative;
   display: grid;
   grid-template-columns: 48px 1fr;
   grid-template-areas:
@@ -532,23 +523,28 @@ blockquote {
   gap: 12px;
   align-items: start;
   background: #fff;
-  border: 1px solid rgba(0,0,0,0.12);
+  border: 1px solid rgba(59, 130, 246, 0.35);
   border-radius: 12px;
   padding: 14px;
+  box-shadow: var(--shadow-sm);
 }
 
 .vpn-card-rank {
   grid-area: rank;
-  width: 48px;
-  height: 48px;
-  border-radius: 10px;
-  background: rgba(37, 99, 235, 0.10);
-  border: 1px solid rgba(37, 99, 235, 0.20);
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: #1d4ed8;
+  border: 1px solid rgba(29, 78, 216, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 900;
-  color: #1d4ed8;
+  color: #fff;
+  font-size: 13px;
 }
 
 .vpn-card-main {
@@ -562,14 +558,14 @@ blockquote {
 }
 
 .vpn-card-logo {
-  width: 56px;
-  height: 56px;
+  width: 44px;
+  height: 44px;
   border-radius: 10px;
   object-fit: contain;
   background: #fff;
   border: 1px solid rgba(0,0,0,0.08);
   padding: 6px;
-  flex: 0 0 56px;
+  flex: 0 0 44px;
 }
 
 .vpn-card-name {
@@ -621,10 +617,9 @@ blockquote {
   grid-area: cta;
   border-top: 1px solid rgba(0,0,0,0.08);
   padding-top: 12px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 10px;
-  justify-content: center;
 }
 
 .vpn-card-score {
@@ -643,12 +638,13 @@ blockquote {
 .vpn-card-cta-btn {
   display: inline-block;
   text-align: center;
-  padding: 10px 12px;
-  border-radius: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
   background: #f97316;
   color: #fff;
   font-weight: 900;
   border: 1px solid rgba(249, 115, 22, 0.40);
+  box-shadow: 0 10px 22px rgba(249, 115, 22, 0.18);
 }
 
 .vpn-card-cta-btn:hover {
@@ -697,13 +693,19 @@ blockquote {
   }
 
   .vpn-card {
-    grid-template-columns: 48px 1.2fr 1fr;
+    padding: 16px 16px;
+    grid-template-columns: 1.35fr 1fr 0.85fr;
     grid-template-areas:
-      "rank brand cta"
-      "rank features cta";
+      "brand features cta"
+      "brand features cta";
     column-gap: 14px;
     row-gap: 10px;
     align-items: start;
+  }
+
+  .vpn-card-rank {
+    top: 14px;
+    left: 14px;
   }
 
   .vpn-card-features {
@@ -718,6 +720,7 @@ blockquote {
     padding-top: 0;
     border-left: 1px solid rgba(0,0,0,0.08);
     padding-left: 12px;
+    align-content: start;
   }
 }
 
