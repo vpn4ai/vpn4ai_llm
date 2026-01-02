@@ -30,6 +30,11 @@
   '/vpn/posts/atlas-review/'
 ] %}
 {% set hasEn = canonicalPath in enReadyPaths %}
+{% set isRecommendPage = canonicalPath == '/vpn/recommend/' %}
+{% set isPostsListPage = canonicalPath == '/vpn/posts/' %}
+{% set isKbListPage = canonicalPath == '/vpn/kb/' %}
+{% set isReviewPage = (canonicalPath | slice(0, 11)) == '/vpn/posts/' and (canonicalPath | slice(-8)) == '-review/' %}
+{% set isKbArticlePage = (canonicalPath | slice(0, 8)) == '/vpn/kb/' and canonicalPath != '/vpn/kb/' %}
 <html lang="{{ htmlLang }}">
   <head>
     <meta charset="UTF-8" />
@@ -100,6 +105,51 @@
       }
     </script>
 
+    {% set schemaPageType = 'WebPage' %}
+    {% if isRecommendPage or isPostsListPage or isKbListPage %}
+      {% set schemaPageType = 'CollectionPage' %}
+    {% endif %}
+    {% if isReviewPage or isKbArticlePage %}
+      {% set schemaPageType = 'Article' %}
+    {% endif %}
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "{{ schemaPageType }}",
+        "@id": "{{ page.url | absoluteUrl(site.url) }}#{{ schemaPageType | lower }}",
+        "url": "{{ page.url | absoluteUrl(site.url) }}",
+        "name": "{% if title %}{{ title }}{% else %}{{ site.title }}{% endif %}",
+        "headline": "{% if title %}{{ title }}{% else %}{{ site.title }}{% endif %}",
+        "description": "{% if description %}{{ description }}{% else %}{{ site.description }}{% endif %}",
+        "inLanguage": "{{ htmlLang }}",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "{{ site.title }}",
+          "url": "{{ '/' | absoluteUrl(site.url) }}"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "{{ site.title }}",
+          "url": "{{ '/' | absoluteUrl(site.url) }}",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "{{ '/assets/images/logo.png' | absoluteUrl(site.url) }}"
+          }
+        }
+        {% if schemaPageType == 'Article' %}
+        ,"mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "{{ page.url | absoluteUrl(site.url) }}"
+        }
+        {% if page.date %}
+        ,"datePublished": "{{ page.date | dateIso }}"
+        ,"dateModified": "{{ (updated or page.date) | dateIso }}"
+        {% endif %}
+        {% endif %}
+      }
+    </script>
+
     <link rel="stylesheet" href="/assets/css/site.css" />
   </head>
   <body>
@@ -128,6 +178,35 @@
 
     <main id="content" class="main-content" role="main">
       {{ content | safe }}
+
+      {% if isReviewPage %}
+        {% set moreTitle = '继续阅读' %}
+        {% set moreDesc = '如果你要更快做决定，可以从“总推荐”开始，然后对比评测方法与知识库要点。' %}
+        {% set moreRecommend = '回到推荐榜单（按场景）' %}
+        {% set morePosts = '查看评测文章列表' %}
+        {% set moreMethod = '查看评测方法' %}
+        {% set moreKb = '进入知识库' %}
+        {% if currentLang == 'en' %}
+          {% set moreTitle = 'Next steps' %}
+          {% set moreDesc = 'For faster decision-making, start from the recommendation page, then read methodology and key guides.' %}
+          {% set moreRecommend = 'Back to recommendations' %}
+          {% set morePosts = 'All review articles' %}
+          {% set moreMethod = 'Review methodology' %}
+          {% set moreKb = 'Knowledge base' %}
+        {% endif %}
+
+        <hr />
+        <div class="section-body">
+          <div style="font-weight: 900;">{{ moreTitle }}</div>
+          <div style="margin-top: 6px; color: rgba(0,0,0,0.75);">{{ moreDesc }}</div>
+          <div class="cta-group" style="margin-bottom: 0;">
+            <a class="cta-primary" href="{{ '/vpn/recommend/' | withLangPrefix(langKey) }}">{{ moreRecommend }}</a>
+            <a class="cta-secondary" href="{{ '/vpn/posts/' | withLangPrefix(langKey) }}">{{ morePosts }}</a>
+            <a class="cta-secondary" href="{{ '/vpn/review-methodology/' | withLangPrefix(langKey) }}">{{ moreMethod }}</a>
+            <a class="cta-secondary" href="{{ '/vpn/kb/' | withLangPrefix(langKey) }}">{{ moreKb }}</a>
+          </div>
+        </div>
+      {% endif %}
     </main>
 
     {% set footerTitle = '关注 an1688' %}
