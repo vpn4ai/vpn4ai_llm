@@ -88,19 +88,24 @@
     <link rel="stylesheet" href="/assets/css/site.css" />
   </head>
   <body>
-    <header class="site-topbar" role="banner">
-      <div class="site-topbar-inner">
-        <a class="site-topbar-brand" href="{{ '/vpn/recommend/' | withLangPrefix(currentLang) }}" aria-label="an1688">
-          <img class="site-topbar-logo" src="/assets/images/logo.png" alt="an1688" loading="eager" />
-          <div class="site-topbar-title">{{ site.title }}</div>
-        </a>
-        <div class="site-topbar-right">
-          <select id="lang-select" class="site-topbar-lang">
-            <option value="zh">简体中文</option>
-            <option value="en">English</option>
-          </select>
-        </div>
-      </div>
+    <header class="page-header" role="banner">
+      <div class="project-name">{% if title %}{{ title }}{% else %}{{ site.title }}{% endif %}</div>
+
+      {% set navHome = '首页' %}
+      {% set navPosts = '评测文章列表' %}
+      {% if currentLang == 'en' %}
+        {% set navHome = 'Home' %}
+        {% set navPosts = 'Review List' %}
+      {% endif %}
+
+      <nav class="nav">
+        <a class="btn" href="{{ '/vpn/recommend/' | withLangPrefix(currentLang) }}">{{ navHome }}</a>
+        <a class="btn" href="{{ '/vpn/posts/' | withLangPrefix(currentLang) }}">{{ navPosts }}</a>
+        <select id="lang-select" class="btn" style="max-width: 140px;">
+          <option value="zh">中文</option>
+          <option value="en">English</option>
+        </select>
+      </nav>
     </header>
 
     <main id="content" class="main-content" role="main">
@@ -108,7 +113,6 @@
     </main>
 
     {% set footerTitle = '关注 an1688' %}
-    {% set footerDesc = 'an1688 致力于为用户提供 VPN 评测与选购建议，帮助用户在隐私保护、跨境办公、学习与内容访问等场景下做出更合适的选择。' %}
     {% set footerTerms = 'Terms' %}
     {% set footerPrivacy = 'privacy-policy' %}
     {% set footerDmca = 'DMCA' %}
@@ -117,7 +121,6 @@
     {% set footerReviews = '评测文章' %}
     {% if currentLang == 'en' %}
       {% set footerTitle = 'Follow an1688' %}
-      {% set footerDesc = 'an1688 is dedicated to providing VPN reviews and purchasing recommendations, helping users make better choices for privacy protection, cross-border work, learning, and content access.' %}
       {% set footerTerms = 'Terms' %}
       {% set footerPrivacy = 'privacy-policy' %}
       {% set footerDmca = 'DMCA' %}
@@ -128,19 +131,24 @@
 
     <footer class="site-footer" role="contentinfo">
       <div class="site-footer-inner">
-        <div class="site-footer-brand">
-          <img class="site-footer-logo" src="/assets/images/logo.png" alt="an1688" loading="lazy" />
-          <div class="site-footer-brand-text">
-            <div class="site-footer-brand-title">{{ site.title }}</div>
-            <div class="site-footer-brand-desc">{{ footerDesc }}</div>
+        <div class="site-footer-col">
+          <div class="site-footer-brand">
+            <img class="site-footer-logo" src="/assets/images/logo.png" alt="an1688" loading="lazy" />
+            <div class="site-footer-brand-text">
+              <div class="site-footer-brand-title">{{ site.title }}</div>
+              <div class="site-footer-brand-desc">{{ site.description }}</div>
+            </div>
           </div>
         </div>
 
-        <div class="site-footer-links-wrap">
+        <div class="site-footer-col">
           <div class="site-footer-links">
             <a href="{{ '/vpn/recommend/' | withLangPrefix(currentLang) }}">{{ footerVpnRecommend }}</a>
             <a href="{{ '/vpn/posts/' | withLangPrefix(currentLang) }}">{{ footerReviews }}</a>
           </div>
+        </div>
+
+        <div class="site-footer-col">
           <div class="site-footer-links">
             <a href="/terms/">{{ footerTerms }}</a>
             <a href="/privacy-policy/">{{ footerPrivacy }}</a>
