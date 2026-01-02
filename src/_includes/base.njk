@@ -9,6 +9,8 @@
   '/disclaimer/',
   '/privacy/',
   '/contact/',
+  '/dmca/',
+  '/terms/',
   '/vpn/review-methodology/',
   '/vpn/posts/nordvpn-review/',
   '/vpn/posts/surfshark-review/',
@@ -86,35 +88,23 @@
       }
     </script>
 
-    <link rel="stylesheet" href="/assets/css/site.css" />
+    	<link rel="stylesheet" href="/assets/css/site.css" />
   </head>
-  <body>
+  <body data-canonical-path="{{ canonicalPath }}">
     <header class="page-header" role="banner">
       <div class="project-name">{% if title %}{{ title }}{% else %}{{ site.title }}{% endif %}</div>
       <h2 class="project-tagline">{% if description %}{{ description }}{% else %}{{ site.description }}{% endif %}</h2>
 
       {% set navHome = '首页' %}
       {% set navPosts = '评测' %}
-      {% set navAbout = '关于' %}
-      {% set navDisclaimer = '免责声明' %}
-      {% set navPrivacy = '隐私政策' %}
-      {% set navContact = '联系' %}
       {% if currentLang == 'en' %}
         {% set navHome = 'Home' %}
         {% set navPosts = 'Reviews' %}
-        {% set navAbout = 'About' %}
-        {% set navDisclaimer = 'Disclaimer' %}
-        {% set navPrivacy = 'Privacy' %}
-        {% set navContact = 'Contact' %}
       {% endif %}
 
       <nav class="nav">
         <a class="btn" href="{{ '/vpn/recommend/' | withLangPrefix(currentLang) }}">{{ navHome }}</a>
         <a class="btn" href="{{ '/vpn/posts/' | withLangPrefix(currentLang) }}">{{ navPosts }}</a>
-        <a class="btn" href="{{ '/about/' | withLangPrefix(currentLang) }}">{{ navAbout }}</a>
-        <a class="btn" href="{{ '/disclaimer/' | withLangPrefix(currentLang) }}">{{ navDisclaimer }}</a>
-        <a class="btn" href="{{ '/privacy/' | withLangPrefix(currentLang) }}">{{ navPrivacy }}</a>
-        <a class="btn" href="{{ '/contact/' | withLangPrefix(currentLang) }}">{{ navContact }}</a>
         <select id="lang-select" class="btn" style="max-width: 140px;">
           <option value="zh">中文</option>
           <option value="en">English</option>
@@ -124,6 +114,59 @@
 
     <main id="content" class="main-content" role="main">
       {{ content | safe }}
+
+      <footer class="site-footer" role="contentinfo">
+        <div class="site-footer-inner">
+          <div class="site-footer-brand">
+            <div class="site-footer-logo" aria-hidden="true">
+              <img src="/assets/images/logo.jpeg" alt="An1688" />
+            </div>
+            <div class="site-footer-desc">
+              {% if currentLang == 'en' %}
+                An1688 publishes VPN recommendations and hands-on reviews focused on privacy protection and connection security.
+              {% else %}
+                An1688 整理 VPN 选购思路与真实评测，聚焦隐私保护与连接安全。
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="site-footer-cols">
+            <div class="site-footer-col">
+              <div class="site-footer-title">{% if currentLang == 'en' %}Site{% else %}站点{% endif %}</div>
+              <a class="site-footer-link" href="{{ '/about/' | withLangPrefix(currentLang) }}">{% if currentLang == 'en' %}About{% else %}关于{% endif %}</a>
+              <a class="site-footer-link" href="{{ '/vpn/review-methodology/' | withLangPrefix(currentLang) }}">{% if currentLang == 'en' %}Methodology{% else %}评测方法{% endif %}</a>
+              <a class="site-footer-link" href="{{ '/vpn/posts/' | withLangPrefix(currentLang) }}">{% if currentLang == 'en' %}Reviews{% else %}评测文章{% endif %}</a>
+            </div>
+
+            <div class="site-footer-col">
+              <div class="site-footer-title">{% if currentLang == 'en' %}Policies{% else %}政策{% endif %}</div>
+              <a class="site-footer-link" href="{{ '/privacy/' | withLangPrefix(currentLang) }}">{% if currentLang == 'en' %}Privacy{% else %}隐私政策{% endif %}</a>
+              <a class="site-footer-link" href="{{ '/disclaimer/' | withLangPrefix(currentLang) }}">{% if currentLang == 'en' %}Disclaimer{% else %}免责声明{% endif %}</a>
+              <a class="site-footer-link" href="{{ '/dmca/' | withLangPrefix(currentLang) }}">DMCA Policy</a>
+              <a class="site-footer-link" href="{{ '/terms/' | withLangPrefix(currentLang) }}">{% if currentLang == 'en' %}Terms &amp; Conditions{% else %}条款与条件{% endif %}</a>
+            </div>
+
+            <div class="site-footer-col">
+              <div class="site-footer-title">{% if currentLang == 'en' %}Contact{% else %}联系{% endif %}</div>
+              <a class="site-footer-link" href="{{ '/contact/' | withLangPrefix(currentLang) }}">{% if currentLang == 'en' %}Contact{% else %}联系{% endif %}</a>
+              <div class="site-footer-muted">siwey.xin@gmail.com</div>
+            </div>
+
+            <div class="site-footer-col">
+              <div class="site-footer-title">{% if currentLang == 'en' %}Follow An1688{% else %}关注 An1688{% endif %}</div>
+              <div class="site-footer-social">
+                <a class="site-footer-social-btn" href="#" rel="nofollow">Facebook</a>
+                <a class="site-footer-social-btn" href="#" rel="nofollow">X</a>
+                <a class="site-footer-social-btn" href="#" rel="nofollow">YouTube</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="site-footer-bottom">
+          <div>© 2026 an1688.com</div>
+        </div>
+      </footer>
     </main>
 
     <script>

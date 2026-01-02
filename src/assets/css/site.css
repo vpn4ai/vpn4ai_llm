@@ -45,6 +45,77 @@ h2 {
   background: rgba(15, 118, 110, 0.06);
 }
 
+body[data-canonical-path="/vpn/recommend/"] h2 {
+  text-align: center;
+  font-size: 1.35rem;
+  padding: 14px 14px;
+  border-left: 1px solid rgba(0,0,0,0.10);
+}
+
+.page-hero {
+  margin: 6px 0 16px;
+}
+
+.page-hero-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0 12px;
+}
+
+.page-hero-header-title {
+  font-weight: 1000;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+}
+
+.page-hero-banner {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.10);
+  background: linear-gradient(90deg, rgba(255,255,255,0.96), rgba(255,255,255,0.88));
+}
+
+.page-hero-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/assets/images/banner_vpn.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.18;
+}
+
+.page-hero-banner-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  padding: 16px 14px;
+}
+
+.page-hero-banner-title {
+  margin: 0;
+  font-size: 1.55rem;
+  font-weight: 1000;
+}
+
+.page-hero-banner-points {
+  margin: 10px 0 0;
+  padding-left: 1.1rem;
+  color: rgba(0,0,0,0.76);
+}
+
+.page-hero-banner-img {
+  width: 100%;
+  max-width: 320px;
+  justify-self: center;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.10);
+  box-shadow: var(--shadow-sm);
+}
+
 .section-body {
   margin: -0.3rem 0 1.15rem;
   padding: 12px 12px;
@@ -347,11 +418,316 @@ blockquote {
 }
 
 .site-footer {
-  margin-top: 26px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
-  color: var(--muted);
-  font-size: 14px;
+  margin-top: 28px;
+  background: #0b3557;
+  color: rgba(255,255,255,0.86);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+.site-footer-inner {
+  display: grid;
+  grid-template-columns: 1.2fr 2fr;
+  gap: 18px;
+  padding: 18px 18px;
+}
+
+.site-footer-brand {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.site-footer-logo img {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid rgba(255,255,255,0.16);
+}
+
+.site-footer-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.78);
+}
+
+.site-footer-cols {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.site-footer-title {
+  font-weight: 900;
+  font-size: 13px;
+  margin-bottom: 8px;
+  color: rgba(255,255,255,0.92);
+}
+
+.site-footer-link {
+  display: block;
+  padding: 4px 0;
+  color: rgba(255,255,255,0.82);
+  text-decoration: none;
+}
+
+.site-footer-link:hover {
+  text-decoration: underline;
+}
+
+.site-footer-muted {
+  color: rgba(255,255,255,0.70);
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+.site-footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.site-footer-social-btn {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.16);
+  color: rgba(255,255,255,0.88);
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.site-footer-social-btn:hover {
+  text-decoration: none;
+  filter: brightness(1.05);
+}
+
+.site-footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  border-top: 1px solid rgba(255,255,255,0.10);
+  color: rgba(255,255,255,0.72);
+  font-size: 13px;
+}
+
+.vpn-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.vpn-card {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  grid-template-areas:
+    "rank brand"
+    "features features"
+    "cta cta";
+  gap: 12px;
+  align-items: start;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.vpn-card-rank {
+  grid-area: rank;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: rgba(37, 99, 235, 0.10);
+  border: 1px solid rgba(37, 99, 235, 0.20);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  color: #1d4ed8;
+}
+
+.vpn-card-main {
+  grid-area: brand;
+}
+
+.vpn-card-brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.vpn-card-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  padding: 6px;
+  flex: 0 0 56px;
+}
+
+.vpn-card-name {
+  font-weight: 900;
+  font-size: 18px;
+}
+
+.vpn-card-sub {
+  margin-top: 2px;
+  color: rgba(0,0,0,0.65);
+  font-size: 13px;
+}
+
+.vpn-card-platforms {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.vpn-tag {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.10);
+  background: rgba(0,0,0,0.02);
+  color: rgba(0,0,0,0.78);
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.vpn-card-features {
+  grid-area: features;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding-top: 10px;
+}
+
+.vpn-card-features-title {
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.vpn-card-features ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.vpn-card-cta {
+  grid-area: cta;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+}
+
+.vpn-card-score {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: rgba(37, 99, 235, 0.10);
+  border: 1px solid rgba(37, 99, 235, 0.20);
+  font-weight: 900;
+  color: #1d4ed8;
+}
+
+.vpn-card-cta-btn {
+  display: inline-block;
+  text-align: center;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #f97316;
+  color: #fff;
+  font-weight: 900;
+  border: 1px solid rgba(249, 115, 22, 0.40);
+}
+
+.vpn-card-cta-btn:hover {
+  text-decoration: none;
+  filter: brightness(1.02);
+}
+
+.vpn-card-cta-secondary {
+  display: inline-block;
+  text-align: center;
+  padding: 9px 12px;
+  border-radius: 10px;
+  background: #fff;
+  color: #111827;
+  font-weight: 900;
+  border: 1px solid rgba(0,0,0,0.18);
+}
+
+.vpn-card-cta-secondary:hover {
+  text-decoration: none;
+  filter: brightness(0.99);
+}
+
+.vpn-card-refund {
+  color: rgba(0,0,0,0.65);
+  font-weight: 800;
+  font-size: 13px;
+  text-align: center;
+}
+
+@media (max-width: 980px) {
+  .page-hero-header-title {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 980px) {
+  .page-hero-banner-inner {
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    padding: 18px 18px;
+  }
+  .page-hero-banner-img {
+    max-width: 360px;
+    justify-self: end;
+  }
+
+  .vpn-card {
+    grid-template-columns: 48px 1.2fr 1fr;
+    grid-template-areas:
+      "rank brand cta"
+      "rank features cta";
+    column-gap: 14px;
+    row-gap: 10px;
+    align-items: start;
+  }
+
+  .vpn-card-features {
+    border-top: 0;
+    padding-top: 0;
+    border-left: 1px solid rgba(0,0,0,0.08);
+    padding-left: 12px;
+  }
+
+  .vpn-card-cta {
+    border-top: 0;
+    padding-top: 0;
+    border-left: 1px solid rgba(0,0,0,0.08);
+    padding-left: 12px;
+  }
+}
+
+@media (max-width: 860px) {
+  .site-footer-inner {
+    grid-template-columns: 1fr;
+  }
+  .site-footer-cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 768px) {
