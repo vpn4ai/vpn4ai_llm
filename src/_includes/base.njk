@@ -139,23 +139,30 @@
         </div>
 
         <div class="site-footer-col">
-          <div class="site-footer-heading">Policies</div>
-          <div class="site-footer-links site-footer-links-inline">
-            <a href="/terms/">{{ footerTerms }}</a>
-            <span class="site-footer-sep">|</span>
-            <a href="/privacy-policy/">{{ footerPrivacy }}</a>
-            <span class="site-footer-sep">|</span>
-            <a href="/dmca/">{{ footerDmca }}</a>
-            <span class="site-footer-sep">|</span>
-            <a href="/affiliate-disclosure/">{{ footerAffiliate }}</a>
-          </div>
-          <div class="site-footer-heading" style="margin-top: 12px;">{{ footerTitle }}</div>
+          <div class="site-footer-heading">Links</div>
           <div class="site-footer-links">
-            <a href="https://www.an1688.com" target="_blank" rel="nofollow">an1688.com</a>
+            <a href="{{ '/vpn/recommend/' | withLangPrefix(currentLang) }}">{{ currentLang == 'en' ? 'VPN Recommendation' : 'VPN 推荐' }}</a>
+            <a href="{{ '/vpn/posts/' | withLangPrefix(currentLang) }}">{{ currentLang == 'en' ? 'Reviews' : '评测文章' }}</a>
+          </div>
+        </div>
+
+        <div class="site-footer-col">
+          <div class="site-footer-heading">Policies</div>
+          <div class="site-footer-links">
+            <a href="/terms/">{{ footerTerms }}</a>
+            <a href="/privacy-policy/">{{ footerPrivacy }}</a>
+            <a href="/dmca/">{{ footerDmca }}</a>
+            <a href="/affiliate-disclosure/">{{ footerAffiliate }}</a>
           </div>
         </div>
       </div>
-      <div class="site-footer-bottom">© 2026 an1688</div>
+      <div class="site-footer-bottom">
+        <div>© 2026 an1688</div>
+        <div class="site-footer-bottom-right">
+          <span class="site-footer-bottom-title">{{ footerTitle }}</span>
+          <a href="https://www.an1688.com" target="_blank" rel="nofollow">an1688.com</a>
+        </div>
+      </div>
     </footer>
 
     <script>

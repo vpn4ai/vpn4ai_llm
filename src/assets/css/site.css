@@ -394,10 +394,12 @@ blockquote {
 }
 
 .site-footer-logo {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
   background: rgba(255,255,255,0.08);
+  display: block;
+  object-fit: contain;
 }
 
 .site-footer-brand-title {
@@ -435,9 +437,25 @@ blockquote {
 .site-footer-bottom {
   border-top: 1px solid rgba(255,255,255,0.12);
   padding: 12px 16px;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  max-width: var(--page-max);
+  margin: 0 auto;
   color: rgba(255,255,255,0.70);
   font-size: 13px;
+}
+
+.site-footer-bottom-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.site-footer-bottom-title {
+  font-weight: 800;
+  color: rgba(255,255,255,0.86);
 }
 
 @media (max-width: 720px) {
