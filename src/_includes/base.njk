@@ -90,13 +90,12 @@
   <body>
     <header class="page-header" role="banner">
       <div class="project-name">{% if title %}{{ title }}{% else %}{{ site.title }}{% endif %}</div>
-      <h2 class="project-tagline">{% if description %}{{ description }}{% else %}{{ site.description }}{% endif %}</h2>
 
-      {% set navHome = '推荐' %}
-      {% set navPosts = '评测' %}
+      {% set navHome = '首页' %}
+      {% set navPosts = '评测文章列表' %}
       {% if currentLang == 'en' %}
-        {% set navHome = 'Guide' %}
-        {% set navPosts = 'Reviews' %}
+        {% set navHome = 'Home' %}
+        {% set navPosts = 'Review List' %}
       {% endif %}
 
       <nav class="nav">

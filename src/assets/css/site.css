@@ -430,6 +430,10 @@ blockquote {
   color: rgba(255,255,255,0.88);
 }
 
+.site-footer a:visited {
+  color: rgba(255,255,255,0.88);
+}
+
 .site-footer a:hover {
   text-decoration: underline;
 }
@@ -471,6 +475,11 @@ blockquote {
 .site-footer-heading {
   font-weight: 900;
   margin-bottom: 8px;
+  color: rgba(255,255,255,0.94);
+}
+
+.site-footer-brand-title {
+  color: rgba(255,255,255,0.96);
 }
 
 .site-footer-links {
