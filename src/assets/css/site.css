@@ -72,6 +72,15 @@ h3 {
   background: #ffffff;
 }
 
+ .kb-logo {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  vertical-align: -4px;
+  margin-right: 8px;
+  border-radius: 5px;
+ }
+
 h2, h3 {
   scroll-margin-top: 90px;
 }
@@ -94,6 +103,16 @@ table {
   border: 1px solid rgba(0,0,0,0.12);
   border-radius: 12px;
   overflow: hidden;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-scroll > table {
+  margin: 0;
+  min-width: 720px;
 }
 
 th, td {
@@ -360,6 +379,13 @@ h2#top + p + .vpn-card-list .vpn-card-title {
 @media (max-width: 720px) {
   .vpn-card {
     padding: 12px;
+  }
+
+  .kb-logo {
+    width: 20px;
+    height: 20px;
+    vertical-align: -4px;
+    margin-right: 7px;
   }
 
   .vpn-card-title {

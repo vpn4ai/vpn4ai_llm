@@ -1,0 +1,106 @@
+---
+layout: base.njk
+title: Open-source VPN software
+description: A practical overview of well-known open-source VPN software and related protocols.
+permalink: /vpn/en/kb/open-source-vpn/
+lang: en
+---
+
+<h1>Open-source VPN software</h1>
+
+<div class="section-body">
+  <p style="margin-top: 0;">
+    Besides WireGuard and OpenVPN, the following are some of the most widely-known and commonly used open-source VPN protocols or implementations (roughly ranked by real-world relevance).
+  </p>
+  <p style="margin-bottom: 0;">
+    Think of this as a “map” of the open-source VPN ecosystem: legacy enterprise-grade standards, corporate compatibility layers, and the newer overlay networks that replace parts of traditional VPN usage.
+  </p>
+</div>
+
+<h2>Top tier (legacy but still widely used)</h2>
+
+<h3>1️⃣ IPsec (strongSwan / Libreswan)</h3>
+<div class="section-body">
+  <ul style="margin-top: 0;">
+    <li><strong>Open-source:</strong> fully open-source implementations</li>
+    <li><strong>Background:</strong> long history; widely used in enterprise, government, and router deployments</li>
+    <li><strong>Common implementations:</strong> strongSwan (most popular), Libreswan</li>
+  </ul>
+  <div style="font-weight: 900; margin: 10px 0 6px;">⚠️ Downsides</div>
+  <ul style="margin-top: 0;">
+    <li>Complex configuration</li>
+    <li>Average UX under NAT and mobile networks</li>
+  </ul>
+  <div style="font-weight: 900; margin-top: 10px;">One-line take</div>
+  <div style="color: rgba(0,0,0,0.78);">A “proper” engineering standard, but not friendly for typical consumers</div>
+</div>
+
+<h3>2️⃣ SoftEther VPN</h3>
+<div class="section-body">
+  <ul style="margin-top: 0;">
+    <li><strong>License:</strong> GPL</li>
+    <li><strong>Origin:</strong> developed at the University of Tsukuba (Japan)</li>
+    <li><strong>Multi-protocol support:</strong> its own protocol, OpenVPN, L2TP/IPsec, SSTP</li>
+    <li><strong>Known for:</strong> strong traversal capability; once very popular in academia and related communities</li>
+  </ul>
+  <div style="font-weight: 900; margin-top: 10px;">One-line take</div>
+  <div style="color: rgba(0,0,0,0.78);">A “Swiss army knife” VPN, but with a heavier architecture</div>
+</div>
+
+<h2>Second tier (famous in specific circles)</h2>
+
+<h3>3️⃣ OpenConnect</h3>
+<div class="section-body">
+  <ul style="margin-top: 0;">
+    <li><strong>Purpose:</strong> started as a compatible alternative to Cisco AnyConnect</li>
+    <li><strong>Later support:</strong> Palo Alto GlobalProtect, Fortinet, and more</li>
+    <li><strong>Focus:</strong> enterprise VPN compatibility, not consumer-grade usage</li>
+  </ul>
+  <div style="font-weight: 900; margin-top: 10px;">One-line take</div>
+  <div style="color: rgba(0,0,0,0.78);">A powerful compatibility replacement for enterprise VPN clients</div>
+</div>
+
+<h3>4️⃣ Tinc</h3>
+<div class="section-body">
+  <ul style="margin-top: 0;">
+    <li><strong>Type:</strong> Mesh VPN (peer-to-peer)</li>
+    <li><strong>Common use:</strong> multi-datacenter networking, internal connectivity</li>
+    <li><strong>Emphasis:</strong> networking/overlay rather than “bypass” usage</li>
+  </ul>
+  <div style="font-weight: 900; margin-top: 10px;">One-line take</div>
+  <div style="color: rgba(0,0,0,0.78);">A favorite among ops and network engineers</div>
+</div>
+
+<h2>New era: “beyond VPN” overlays (very important)</h2>
+
+<h3>5️⃣ Nebula (by Slack)</h3>
+<div class="section-body">
+  <ul style="margin-top: 0;">
+    <li><strong>Type:</strong> overlay network for zero-trust style connectivity</li>
+    <li><strong>Note:</strong> not a classic VPN, but replacing parts of VPN use cases</li>
+    <li><strong>Comparable to:</strong> Tailscale, ZeroTier</li>
+  </ul>
+  <div style="font-weight: 900; margin-top: 10px;">One-line take</div>
+  <div style="color: rgba(0,0,0,0.78);">A next-generation shape of “VPN-like” networking</div>
+</div>
+
+<h3>6️⃣ ZeroTier (core open-source)</h3>
+<div class="section-body">
+  <ul style="margin-top: 0;">
+    <li><strong>Open-source:</strong> core protocol is open-source (commercially operated)</li>
+    <li><strong>Form:</strong> P2P virtual LAN</li>
+    <li><strong>Known for:</strong> extremely easy setup and usage</li>
+  </ul>
+  <div style="font-weight: 900; margin-top: 10px;">One-line take</div>
+  <div style="color: rgba(0,0,0,0.78);">Not quite a VPN, but often more usable than a VPN</div>
+</div>
+
+<h2>One-sentence summary</h2>
+<div class="section-body">
+  <p style="margin-top: 0;">
+    The only open-source VPN technologies historically recognized on the same “tier” as WireGuard / OpenVPN are <strong>IPsec (strongSwan)</strong> and <strong>SoftEther</strong>.
+  </p>
+  <p style="margin-bottom: 0;">
+    The rest are either <strong>enterprise compatibility replacements</strong> or the newer generation of <strong>post-VPN</strong> overlay networking tools.
+  </p>
+</div>

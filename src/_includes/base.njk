@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 {% set currentLang = lang or site.lang %}
+{% set langKey = 'zh' %}
+{% set htmlLang = 'zh-CN' %}
+{% if currentLang == 'en' %}
+  {% set langKey = 'en' %}
+  {% set htmlLang = 'en' %}
+{% endif %}
 {% set canonicalPath = page.url | stripLangPrefix %}
 {% set enReadyPaths = [
   '/',
   '/vpn/recommend/',
+  '/vpn/kb/',
+  '/vpn/kb/open-source-vpn/',
   '/vpn/posts/',
   '/about/',
   '/disclaimer/',
@@ -22,10 +30,11 @@
   '/vpn/posts/atlas-review/'
 ] %}
 {% set hasEn = canonicalPath in enReadyPaths %}
-<html lang="{{ currentLang }}">
+<html lang="{{ htmlLang }}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#155799" />
 
     <title>{% if title %}{{ title }}{% else %}{{ site.title }}{% endif %}</title>
     {% if description %}
@@ -49,6 +58,7 @@
     {% if hasEn %}
       <link rel="alternate" hreflang="zh" href="{{ canonicalPath | withLangPrefix('zh') | absoluteUrl(site.url) }}" />
       <link rel="alternate" hreflang="en" href="{{ canonicalPath | withLangPrefix('en') | absoluteUrl(site.url) }}" />
+      <link rel="alternate" hreflang="x-default" href="{{ canonicalPath | withLangPrefix('zh') | absoluteUrl(site.url) }}" />
     {% endif %}
 
     <meta property="og:site_name" content="{{ site.title }}" />
@@ -57,6 +67,11 @@
     <meta property="og:title" content="{% if title %}{{ title }}{% else %}{{ site.title }}{% endif %}" />
     <meta property="og:description" content="{% if description %}{{ description }}{% else %}{{ site.description }}{% endif %}" />
     <meta property="og:image" content="{{ '/assets/images/logo.png' | absoluteUrl(site.url) }}" />
+    <meta property="og:image:alt" content="{{ site.title }}" />
+    <meta property="og:locale" content="{% if langKey == 'en' %}en_US{% else %}zh_CN{% endif %}" />
+    {% if hasEn %}
+      <meta property="og:locale:alternate" content="{% if langKey == 'en' %}zh_CN{% else %}en_US{% endif %}" />
+    {% endif %}
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="{% if title %}{{ title }}{% else %}{{ site.title }}{% endif %}" />
@@ -92,15 +107,18 @@
       <div class="project-name">{% if title %}{{ title }}{% else %}{{ site.title }}{% endif %}</div>
 
       {% set navHome = '首页' %}
-      {% set navPosts = '评测文章列表' %}
+      {% set navPosts = '评测文章' %}
+      {% set navKb = '知识库' %}
       {% if currentLang == 'en' %}
         {% set navHome = 'Home' %}
         {% set navPosts = 'Review List' %}
+        {% set navKb = 'Knowledge Base' %}
       {% endif %}
 
       <nav class="nav">
-        <a class="btn" href="{{ '/vpn/recommend/' | withLangPrefix(currentLang) }}">{{ navHome }}</a>
-        <a class="btn" href="{{ '/vpn/posts/' | withLangPrefix(currentLang) }}">{{ navPosts }}</a>
+        <a class="btn" href="{{ '/vpn/recommend/' | withLangPrefix(langKey) }}">{{ navHome }}</a>
+        <a class="btn" href="{{ '/vpn/kb/' | withLangPrefix(langKey) }}">{{ navKb }}</a>
+        <a class="btn" href="{{ '/vpn/posts/' | withLangPrefix(langKey) }}">{{ navPosts }}</a>
         <select id="lang-select" class="btn" style="max-width: 140px;">
           <option value="zh">中文</option>
           <option value="en">English</option>
@@ -144,8 +162,8 @@
 
         <div class="site-footer-col">
           <div class="site-footer-links">
-            <a href="{{ '/vpn/recommend/' | withLangPrefix(currentLang) }}">{{ footerVpnRecommend }}</a>
-            <a href="{{ '/vpn/posts/' | withLangPrefix(currentLang) }}">{{ footerReviews }}</a>
+            <a href="{{ '/vpn/recommend/' | withLangPrefix(langKey) }}">{{ footerVpnRecommend }}</a>
+            <a href="{{ '/vpn/posts/' | withLangPrefix(langKey) }}">{{ footerReviews }}</a>
           </div>
         </div>
 

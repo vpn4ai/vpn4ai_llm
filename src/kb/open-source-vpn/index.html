@@ -1,0 +1,285 @@
+---
+layout: base.njk
+title: 开源 VPN 软件
+description: 常见开源 VPN / VPN 协议与实现简介（IPsec、SoftEther、OpenConnect、Tinc、Nebula、ZeroTier）。
+permalink: /vpn/kb/open-source-vpn/
+---
+
+<h1>开源 VPN 软件</h1>
+
+<h2>引言</h2>
+<div class="section-body">
+  <p style="margin-top: 0;">
+    在当今数字化时代，保护网络隐私和安全变得至关重要。无论是远程办公、访问受限内容，还是保护敏感数据传输，VPN（虚拟专用网络）都成为现代互联网生活的必需品。
+    在众多 VPN 解决方案中，开源 VPN 软件因其透明性、可审计性和灵活性而备受推崇。
+  </p>
+  <p style="margin-bottom: 0;">
+    本指南将为你梳理主流开源 VPN / 相关协议与实现，帮助你快速理解它们的定位、优势与适用场景，做出更明智的选择。
+  </p>
+</div>
+
+<h2>什么是开源 VPN？</h2>
+<div class="section-body">
+  <p style="margin-top: 0;">开源 VPN 指的是源代码公开、允许用户查看、修改和分发的 VPN 软件。与闭源商业 VPN 相比，开源 VPN 通常具备以下优势：</p>
+  <ul style="margin: 0;">
+    <li><strong>🔎 透明可审计：</strong>任何人都可以检查代码，降低后门/恶意功能风险</li>
+    <li><strong>🌍 社区驱动：</strong>由全球开发者共同维护与改进</li>
+    <li><strong>🧩 高定制性：</strong>可按特定需求修改与优化</li>
+    <li><strong>💰 成本效益：</strong>通常免费或成本更低</li>
+    <li><strong>🧱 长期可持续：</strong>不依赖单一供应商生存</li>
+  </ul>
+</div>
+
+<h2>一线主流开源 VPN</h2>
+
+<h3><img class="kb-logo" src="/assets/images/wireguard.jpeg" alt="WireGuard" loading="lazy" />1. WireGuard® - 现代 VPN 的标杆</h3>
+<div class="section-body">
+  <div style="font-weight: 900;">为什么它重要</div>
+  <p style="margin-top: 6px;">WireGuard 以简洁、快速和安全的特性迅速成为行业新标准，尤其适合现代网络环境与移动端场景。</p>
+  <div style="font-weight: 900; margin-top: 10px;">技术特性</div>
+  <ul style="margin: 6px 0 0;">
+    <li><strong>极简设计：</strong>仅约 4000 行代码（相比 OpenVPN 的 10 万+ 行）</li>
+    <li><strong>密码学现代化：</strong>ChaCha20、Poly1305、Curve25519、BLAKE2s</li>
+    <li><strong>性能卓越：</strong>速度接近物理线路</li>
+    <li><strong>移动设备友好：</strong>支持漫游与快速重连</li>
+  </ul>
+  <div style="font-weight: 900; margin-top: 10px;">使用场景</div>
+  <ul style="margin: 6px 0 0;">
+    <li>需要高性能的 VPN 连接</li>
+    <li>移动设备频繁切换网络</li>
+    <li>对连接稳定性要求高的应用</li>
+    <li>物联网设备安全连接</li>
+  </ul>
+</div>
+
+<h3><img class="kb-logo" src="/assets/images/openvpn_logo.png" alt="OpenVPN" loading="lazy" />2. OpenVPN - 成熟稳重的老将</h3>
+<div class="section-body">
+  <div style="font-weight: 900;">定位与特点</div>
+  <p style="margin-top: 6px;">OpenVPN 是历史最悠久、应用最广泛的开源 VPN 方案之一，以稳定性与功能丰富著称。</p>
+  <div style="font-weight: 900; margin-top: 10px;">技术特性</div>
+  <ul style="margin: 6px 0 0;">
+    <li><strong>协议灵活：</strong>支持 TCP 与 UDP</li>
+    <li><strong>强认证机制：</strong>基于 SSL/TLS 证书认证</li>
+    <li><strong>配置灵活：</strong>支持多种认证方式与网络拓扑</li>
+    <li><strong>社区生态：</strong>拥有大量第三方工具与插件</li>
+  </ul>
+  <div style="font-weight: 900; margin-top: 10px;">使用场景</div>
+  <ul style="margin: 6px 0 0;">
+    <li>企业 VPN 接入</li>
+    <li>政府/金融等高安全场景</li>
+    <li>复杂网络环境</li>
+    <li>需要与现有基础设施集成</li>
+  </ul>
+</div>
+
+<h3>3. IPsec（strongSwan / Libreswan）- 企业级标准</h3>
+<div class="section-body">
+  <p style="margin-top: 0;">IPsec 是 IETF 标准化的 VPN 协议，在企业环境中广泛应用。strongSwan 与 Libreswan 是其主流开源实现。</p>
+  <div style="font-weight: 900; margin-top: 10px;">技术特性</div>
+  <ul style="margin: 6px 0 0;">
+    <li><strong>标准化：</strong>IETF RFC 标准</li>
+    <li><strong>系统集成：</strong>多数操作系统内置支持</li>
+    <li><strong>双重保护：</strong>AH（认证头）与 ESP（封装安全载荷）</li>
+    <li><strong>多种模式：</strong>传输模式/隧道模式</li>
+  </ul>
+  <div style="font-weight: 900; margin-top: 10px;">使用场景</div>
+  <ul style="margin: 6px 0 0;">
+    <li>企业网络互联</li>
+    <li>与硬件 VPN 设备互操作</li>
+    <li>需要标准协议兼容性</li>
+    <li>政府/金融网络</li>
+  </ul>
+</div>
+
+<h2>二线特色开源 VPN</h2>
+
+<h3>4. SoftEther VPN - 全能型解决方案</h3>
+<div class="section-body">
+  <p style="margin-top: 0;">SoftEther VPN 由日本筑波大学开发，是多协议 VPN 解决方案，以功能强与兼容性好著称。</p>
+  <div style="font-weight: 900; margin-top: 10px;">独特优势</div>
+  <ul style="margin: 6px 0 0;">
+    <li><strong>多协议：</strong>OpenVPN、L2TP/IPsec、SSTP、SoftEther 协议</li>
+    <li><strong>穿透强：</strong>优秀的 NAT 穿透</li>
+    <li><strong>集中管理：</strong>提供 GUI 管理工具</li>
+    <li><strong>企业特性：</strong>支持集群、负载均衡</li>
+  </ul>
+</div>
+
+<h3>5. OpenConnect - 企业 VPN 兼容方案</h3>
+<div class="section-body">
+  <p style="margin-top: 0;">OpenConnect 是 Cisco AnyConnect 协议的开源实现，主要用于连接企业 VPN 网关。</p>
+  <div style="font-weight: 900; margin-top: 10px;">核心特性</div>
+  <ul style="margin: 6px 0 0;">
+    <li><strong>企业兼容：</strong>Cisco、Juniper、Palo Alto 等</li>
+    <li><strong>双重 VPN：</strong>可在既有 VPN 上再建立连接</li>
+    <li><strong>脚本支持：</strong>可自定义连接行为</li>
+    <li><strong>协议优化：</strong>使用 DTLS 提升性能</li>
+  </ul>
+</div>
+
+<h2>新兴 VPN 技术</h2>
+
+<h3>6. 零信任网络访问（ZTNA）</h3>
+<div class="section-body">
+  <p style="margin-top: 0;">零信任模型正在逐步取代传统“边界安全”理念，下面这些工具与 VPN 高度相关，且在很多场景下更适合现代化团队与多设备使用。</p>
+
+  <div style="font-weight: 900; margin-top: 10px;">Nebula（Slack 出的）</div>
+  <ul style="margin: 6px 0 0;">
+    <li>基于证书的身份验证</li>
+    <li>自动建立 P2P 连接</li>
+    <li>内置防火墙规则</li>
+    <li>轻量级设计</li>
+  </ul>
+
+  <div style="font-weight: 900; margin-top: 10px;">Tailscale</div>
+  <ul style="margin: 6px 0 0;">
+    <li>基于 WireGuard 构建</li>
+    <li>集中式管理控制台</li>
+    <li>自动 NAT 穿透</li>
+    <li>集成身份提供商</li>
+  </ul>
+
+  <div style="font-weight: 900; margin-top: 10px;">Headscale</div>
+  <ul style="margin: 6px 0 0;">
+    <li>Tailscale 控制器的开源替代</li>
+    <li>自托管选项</li>
+    <li>完全控制数据</li>
+    <li>社区驱动开发</li>
+  </ul>
+</div>
+
+<h2>性能对比分析</h2>
+
+<div class="table-scroll">
+  <table>
+    <thead>
+      <tr>
+        <th>VPN 解决方案</th>
+        <th>协议类型</th>
+        <th>性能表现</th>
+        <th>安全性</th>
+        <th>配置难度</th>
+        <th>最佳场景</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>WireGuard</strong></td>
+        <td>现代协议</td>
+        <td>⭐⭐⭐⭐⭐</td>
+        <td>⭐⭐⭐⭐</td>
+        <td>⭐⭐</td>
+        <td>高性能需求</td>
+      </tr>
+      <tr>
+        <td><strong>OpenVPN</strong></td>
+        <td>SSL/TLS</td>
+        <td>⭐⭐⭐⭐</td>
+        <td>⭐⭐⭐⭐⭐</td>
+        <td>⭐⭐⭐</td>
+        <td>企业级应用</td>
+      </tr>
+      <tr>
+        <td><strong>IPsec</strong></td>
+        <td>标准协议</td>
+        <td>⭐⭐⭐⭐</td>
+        <td>⭐⭐⭐⭐</td>
+        <td>⭐</td>
+        <td>企业互联</td>
+      </tr>
+      <tr>
+        <td><strong>SoftEther</strong></td>
+        <td>多协议</td>
+        <td>⭐⭐⭐⭐</td>
+        <td>⭐⭐⭐⭐</td>
+        <td>⭐⭐⭐</td>
+        <td>多协议兼容</td>
+      </tr>
+      <tr>
+        <td><strong>ZeroTier</strong></td>
+        <td>SD-WAN</td>
+        <td>⭐⭐⭐⭐⭐</td>
+        <td>⭐⭐⭐⭐</td>
+        <td>⭐</td>
+        <td>零信任网络</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>安全考量</h2>
+
+<h3>密码学选择</h3>
+<div class="section-body">
+  <ul style="margin: 0;">
+    <li><strong>WireGuard：</strong>Curve25519、ChaCha20、Poly1305</li>
+    <li><strong>OpenVPN：</strong>AES-256、SHA256、RSA-2048+</li>
+    <li><strong>IPsec：</strong>IKEv2、AES-GCM、SHA2</li>
+  </ul>
+</div>
+
+<h3>最佳安全实践</h3>
+<div class="section-body">
+  <ol style="margin: 0; padding-left: 1.25rem;">
+    <li><strong>定期更新：</strong>保持软件最新版本</li>
+    <li><strong>强密钥管理：</strong>使用足够长度的密钥</li>
+    <li><strong>最小权限原则：</strong>仅开放必要访问权限</li>
+    <li><strong>监控审计：</strong>记录并监控 VPN 连接</li>
+    <li><strong>多重认证：</strong>结合证书与用户认证</li>
+  </ol>
+</div>
+
+<h2>故障排除</h2>
+
+<div class="section-body">
+  <div style="font-weight: 900;">1. 连接失败</div>
+  <ul style="margin: 6px 0 0;">
+    <li>检查防火墙规则</li>
+    <li>验证端口转发</li>
+    <li>确认服务运行状态</li>
+  </ul>
+
+  <div style="font-weight: 900; margin-top: 10px;">2. 速度缓慢</div>
+  <ul style="margin: 6px 0 0;">
+    <li>尝试不同传输协议</li>
+    <li>调整 MTU 值</li>
+    <li>检查网络拥塞</li>
+  </ul>
+
+  <div style="font-weight: 900; margin-top: 10px;">3. 证书问题</div>
+  <ul style="margin: 6px 0 0;">
+    <li>验证证书有效期</li>
+    <li>检查证书链完整性</li>
+    <li>重新生成过期证书</li>
+  </ul>
+</div>
+
+<h2>未来趋势</h2>
+
+<div class="section-body">
+  <div style="font-weight: 900;">VPN 技术演进方向</div>
+  <ol style="margin: 6px 0 0; padding-left: 1.25rem;">
+    <li><strong>量子安全 VPN：</strong>抗量子计算的加密算法</li>
+    <li><strong>AI 驱动的 VPN：</strong>智能流量优化与威胁检测</li>
+    <li><strong>边缘计算 VPN：</strong>与边缘计算集成的 VPN 方案</li>
+    <li><strong>区块链 VPN：</strong>去中心化的 VPN 网络</li>
+  </ol>
+</div>
+
+<h2>结论</h2>
+
+<div class="section-body">
+  <p style="margin-top: 0;">选择合适的开源 VPN 需要综合考虑性能、安全、复杂度与维护成本。下面是快速选择指南：</p>
+  <ul style="margin: 6px 0 0;">
+    <li><strong>追求性能和简洁：</strong>选择 <strong>WireGuard</strong></li>
+    <li><strong>需要企业级功能与兼容性：</strong>选择 <strong>OpenVPN</strong></li>
+    <li><strong>企业网络互联：</strong>选择 <strong>IPsec</strong></li>
+    <li><strong>需要多协议支持与穿透能力：</strong>选择 <strong>SoftEther</strong></li>
+    <li><strong>零信任网络架构：</strong>考虑 <strong>Tailscale / ZeroTier</strong></li>
+  </ul>
+  <p style="margin-bottom: 0;">无论选择哪种方案，都应遵循安全最佳实践，定期更新与维护。开源 VPN 的透明性与社区支持能为你构建更安全、可靠的网络连接打下基础。</p>
+</div>
+
+<blockquote>
+  <strong>重要声明：</strong>本指南仅用于教育目的。使用 VPN 时应遵守当地法律法规与服务条款。某些国家/地区对 VPN 使用有特定限制，请确保你的使用方式合法合规。
+</blockquote>
