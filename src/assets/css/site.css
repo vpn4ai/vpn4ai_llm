@@ -43,7 +43,7 @@ h2 {
   border: 1px solid rgba(0,0,0,0.10);
   border-left: 6px solid rgba(15, 118, 110, 0.75);
   background: rgba(15, 118, 110, 0.06);
-  text-align: center;
+  text-align: left;
 }
 
 .section-body {
