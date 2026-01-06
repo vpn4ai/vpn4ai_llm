@@ -1,0 +1,181 @@
+---
+layout: base.njk
+title: VLESS + Reality 技术详解
+description: 从工程视角拆解 VLESS 与 Reality 的分层职责：VLESS 解决“代理转发”，Reality 解决“伪装与生存”。理解它们为何成为 2026 年公网环境的抗封锁天花板（仅作信息参考，不参与 SEO）。
+permalink: /vpn/guide/vless-reality/
+noindex: true
+nointerlink: true
+sitemap: false
+---
+
+<h1>VLESS + Reality 技术详解</h1>
+
+<p>
+  如果你在 2026 年还想在公网环境里把“稳定”和“速度”同时拿到手，VLESS + Reality 基本绕不开。
+  但这套组合经常被误解：
+  有人把 Reality 当作“单独的翻墙协议”，也有人以为 VLESS 本身就等于“强伪装”。
+  这两种理解都会让你在选节点、看评测、甚至排查故障时走弯路。
+</p>
+
+<p>
+  本文从工程师视角把它们拆解清楚——
+  <strong>每一层各自负责什么</strong>、<strong>公网侧到底能看到什么</strong>、以及为什么它能在 2026 年仍然“活着”。
+</p>
+
+<h2>1. VLESS 是什么</h2>
+
+<h3>1.1 定义</h3>
+
+<p>
+  VLESS 常被解释为 “V2Ray Lightweight &amp; Encrypted Stream”。
+  你可以把它当作 V2Ray/Xray 生态中一类更“轻量、更干净”的代理协议：
+  它的核心职责是把客户端的网络流量交给服务器转发，属于“代理层”。
+</p>
+
+<h3>1.2 特点</h3>
+
+<div class="table-scroll">
+<table>
+  <thead>
+    <tr>
+      <th>特点</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>更少固定结构特征</td>
+      <td>相较 VMess 的一些历史实现，VLESS 的设计更强调“干净”，降低被特征库直接命中的概率。</td>
+    </tr>
+    <tr>
+      <td>支持多种传输形态</td>
+      <td>可组合 TCP / WS / gRPC / QUIC 等，让“怎么传”交给更像真实业务的传输层。</td>
+    </tr>
+    <tr>
+      <td>轻量级</td>
+      <td>协议负担更轻，更低的 CPU 消耗与更可控的延迟。</td>
+    </tr>
+    <tr>
+      <td>可与 TLS/伪装层结合</td>
+      <td>VLESS 本身不负责“伪装得像不像 HTTPS”，但它很适合承载在更强的伪装层之下。</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>
+  关键结论：<strong>VLESS 是代理协议本身</strong>。
+  它负责把你的流量“送到服务器并转发出去”，但它并不保证在公网侧看起来像正常网页访问。
+</p>
+
+<h2>2. Reality 是什么</h2>
+
+<h3>2.1 定义</h3>
+
+<p>
+  Reality 更准确的理解是：VLESS之外的<strong>伪装传输层</strong>。
+  它不负责“代理逻辑”，而是负责“生存逻辑”——
+  让监管/识别设备更倾向于把这条连接当成正常的 HTTPS / QUIC 流量，而不是一条代理隧道。
+</p>
+
+<h3>2.2 Reality 做了什么（工程视角）</h3>
+
+<p>
+  很多封锁并不解密内容，它只判断“你像不像正常用户”。
+  Reality 的工作就是把连接在最关键的几处“外观”上做得更像：
+</p>
+
+<ul>
+  <li><strong>TLS 握手更像浏览器：</strong>包括扩展字段、套件排序等细节，降低被 TLS 指纹库标记的概率。</li>
+  <li><strong>域名更自然：</strong>让连接看起来像在访问一个真实存在的网站域名。</li>
+  <li><strong>对抗主动探测：</strong>当探测端“敲门”时，服务端行为更像正常站点而不是代理服务。</li>
+  <li><strong>可选 QUIC/UDP 路线：</strong>在一些网络环境下，QUIC 的行为特征与弱网体验会更占优势。</li>
+</ul>
+
+<div class="hero-banner">
+  <img src="/assets/images/how-tls-13-handshakes-cloudflare.png" alt="TLS 1.3 handshake overview" loading="lazy" />
+</div>
+
+<p>
+  Reality 的核心价值：
+  <strong>把“外观”做对</strong>，比“再加一层加密”更重要。
+</p>
+
+<h2>3. 两者关系：协议 + 伪装层（分层模型）</h2>
+
+<p>
+  最容易理解的方式是把它拆成“内核”和“外衣”：
+</p>
+
+<div class="hero-banner">
+  <img src="/assets/images/vless.png" alt="VLESS and Reality layering diagram" loading="lazy" />
+</div>
+
+<ul>
+  <li><strong>VLESS：</strong>代理层。负责定义客户端与服务器如何“说话”，以及服务器如何替你转发流量。</li>
+  <li><strong>Reality：</strong>传输伪装层。负责让公网看到的是“正常 HTTPS/QUIC 的样子”。</li>
+</ul>
+
+<p>
+  这也是为什么说：<strong>Reality 在最外层，VLESS 在里面</strong>。
+  公网侧看到的优先是握手、指纹、域名与行为形态——而不是你内部用的是 VLESS 还是别的代理层。
+</p>
+
+<h2>4. 为什么它是“抗封锁天花板”</h2>
+
+<p>
+  从封锁者视角看，他们更容易拿到的是“外观信息”。
+  当 VLESS + Reality 把外观做得足够像真实访问时，封锁会面临一个成本问题：
+</p>
+
+<div class="table-scroll">
+<table>
+  <thead>
+    <tr>
+      <th>他们能看到什么</th>
+      <th>Reality 想让它看起来是什么</th>
+      <th>意味着什么</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>协议外观</td>
+      <td>HTTPS / QUIC</td>
+      <td>不能轻易靠“封某个代理协议”解决</td>
+    </tr>
+    <tr>
+      <td>TLS 指纹</td>
+      <td>像 Chrome/Edge 一类主流客户端</td>
+      <td>指纹库难以用低成本把它从海量正常流量中挑出来</td>
+    </tr>
+    <tr>
+      <td>域名</td>
+      <td>真实存在的合法域名</td>
+      <td>直接封域名的代价会更大</td>
+    </tr>
+    <tr>
+      <td>主动探测结果</td>
+      <td>更像正常站点行为</td>
+      <td>探测更难一锤定音</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>
+  所以它被称为“天花板”的原因在于工程上的成本博弈：
+  想彻底封掉这种外观，就可能要付出更大的误伤代价。
+</p>
+
+<h2>5. 工程总结</h2>
+
+<p>
+  VLESS + Reality 并非更复杂，而是<strong>分层职责更清晰</strong>：
+  <strong>VLESS 只负责代理，不暴露特征；Reality 只负责伪装，尽量像正常用户</strong>。
+  这是一种工程设计取胜，而不是投机技巧。
+</p>
+
+<p>
+  本文仅用于帮助你理解协议与伪装层的职责划分与选型逻辑，并不是提供规避执法或规避监管的操作指引。
+  使用相关服务时，请务必遵守所在地的法律法规与服务条款。
+</p>

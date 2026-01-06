@@ -367,11 +367,6 @@
 
         select.value = currentLang;
 
-        if (!saved && target !== currentLang) {
-          location.replace(buildUrl(target));
-          return;
-        }
-
         select.addEventListener("change", function () {
           var v = select.value;
           if (supported.indexOf(v) < 0) return;

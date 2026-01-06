@@ -1,0 +1,171 @@
+---
+layout: base.njk
+title: Chrome 访问 HTTPS 网站时数据如何传输：从 TCP 到 QUIC/HTTP3（工程视角）
+description: 用工程视角讲清楚：HTTPS 是应用层语义，QUIC 是传输层协议。理解传统 HTTPS over TCP 与现代 HTTP/3（HTTPS over QUIC）的关系，并用示意图快速建立网络分层直觉。
+permalink: /vpn/kb/https-quic-http3/
+---
+
+<h1>浏览器访问 HTTPS 网站时数据如何传输</h1>
+
+<p>
+  你在 Chrome 里打开一个 HTTPS 网站时，浏览器到底做了哪些网络动作？
+  很多解释会把 HTTPS、TLS、TCP、QUIC 混在一起讲，听起来像一锅粥。
+  本文用工程视角把它们拆开，并用两张图把关系一次讲透。
+</p>
+
+<h2>一句话总结</h2>
+
+<div class="section-body">
+  <p style="margin-top: 0;">
+    <strong>HTTPS 是“应用层语义”，QUIC 是“传输层协议”。</strong>
+  </p>
+  <p style="margin-bottom: 0;">
+    HTTP/1和HTTP/2，HTTPS 跑在 TCP 上；
+    HTTP/3，HTTPS 跑在 QUIC 上。HTTPS和QUIC是上下层关系。
+  </p>
+</div>
+
+<h2>1. 先把“层级”搞清楚</h2>
+
+<p>
+  用最简化的网络分层来看：
+</p>
+
+<div class="table-scroll">
+<table>
+  <thead>
+    <tr>
+      <th>层级</th>
+      <th>你会在浏览器/网络里看到的名字</th>
+      <th>它负责什么</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>应用层</td>
+      <td>HTTP / HTTPS</td>
+      <td>请求/响应语义：URL、Header、Body、状态码、缓存等</td>
+    </tr>
+    <tr>
+      <td>传输层</td>
+      <td>TCP 或 QUIC</td>
+      <td>怎么把字节可靠地传过去：握手、重传、拥塞控制、多路复用等</td>
+    </tr>
+    <tr>
+      <td>网络层</td>
+      <td>IP</td>
+      <td>路由与寻址：从你这台设备把包送到目标服务器</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>
+  <strong>HTTPS 不负责“怎么传”</strong>，它只规定“你传的网页请求长什么样”；
+  <strong>QUIC 不关心“你传的是什么网页”</strong>，它只负责把数据更快、更稳地送到对端。
+</p>
+
+<h2>2. 传统 HTTPS 是怎么跑的（HTTPS over TCP）</h2>
+
+<p>
+  传统路径可以概括为：
+  <strong>HTTPS = HTTP + TLS</strong>，而 TLS 通常运行在 <strong>TCP</strong> 之上。
+</p>
+
+<div class="section-body">
+  <p style="margin-top: 0;">
+    你访问一个 HTTPS 网站时，典型流程是：
+  </p>
+  <div class="hero-banner">
+    <img src="/assets/images/handshake.png" alt="" loading="lazy" />
+  </div>
+</div>
+
+<p>
+  这条路径的特点是“中间设备很熟”。
+  TCP 的行为模式、TLS 握手的阶段性、以及连接层面的特征都非常标准化。
+  在工程侧，这意味着生态成熟；
+  在网络侧，这也意味着各种代理、网关、加速与审计设备都对它“看得很懂”。
+</p>
+
+<h2>3. QUIC 解决什么问题</h2>
+
+<p>
+  QUIC 的一句话解释是：
+  它把传统上分散在 TCP、TLS、以及部分 HTTP 能力中的关键机制“工程化整合”，并运行在 UDP 之上。
+  它的目标是让传输更快、更适合移动网络。
+</p>
+
+<div class="hero-banner">
+  <img src="/assets/images/QUIC_architecture.png" alt="QUIC architecture diagram" loading="lazy" />
+</div>
+
+<div class="table-scroll">
+<table>
+  <thead>
+    <tr>
+      <th>项目</th>
+      <th>TCP（传统）</th>
+      <th>QUIC（现代）</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>底层承载</td>
+      <td>TCP</td>
+      <td>UDP</td>
+    </tr>
+    <tr>
+      <td>握手成本</td>
+      <td>TCP + TLS（常见 2~3 RTT）</td>
+      <td>更接近一次握手（常见 1 RTT）</td>
+    </tr>
+    <tr>
+      <td>多路复用</td>
+      <td>可能受队头阻塞影响</td>
+      <td>更天然的多路复用，降低队头阻塞问题</td>
+    </tr>
+    <tr>
+      <td>移动网络体验</td>
+      <td>切网/IP 变化更容易断</td>
+      <td>对切网更友好，连接迁移能力更强</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2>4. HTTPS + QUIC = HTTP/3</h2>
+
+<p>
+  当你看到这些说法：
+  <strong>HTTPS over QUIC</strong>、<strong>HTTP/3</strong>、<strong>QUIC TLS 流量</strong>，
+  它们基本是在描述同一件事的不同侧面。
+</p>
+
+<div class="hero-banner">
+  <img src="/assets/images/Http3.jpg" alt="HTTP/3 and HTTPS over QUIC illustration" loading="lazy" />
+</div>
+
+<p>
+  把它重新放回分层结构就非常清晰：
+</p>
+
+<div class="section-body">
+  <p style="margin-top: 0;">
+    应用层：HTTPS（HTTP 语义）
+    <br />传输层：QUIC（基于 UDP）
+    <br />网络层：IP
+  </p>
+  <p style="margin-bottom: 0;">
+    所以，HTTP/3 不是“替代 HTTPS”，而是把 HTTPS 的承载从 TCP 切换到了 QUIC。
+  </p>
+</div>
+
+<h2>5. 简单的理解方式</h2>
+
+<ul>
+  <li><strong>HTTPS 是你在浏览器里看到的“安全网页协议”。</strong>它规定网页怎么请求、怎么响应。</li>
+  <li><strong>QUIC 是底层“怎么把数据更快送到服务器”的方式之一。</strong>它不改变网页的语义，只改变传输路径。</li>
+  <li><strong>HTTP/3 = HTTPS over QUIC。</strong>这是现代浏览器与网站逐步普及的方向。</li>
+</ul>
+

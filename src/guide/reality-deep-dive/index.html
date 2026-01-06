@@ -1,0 +1,246 @@
+---
+layout: base.njk
+title: 继续深挖 Reality：它如何“借用 HTTP/3 的外形”长期存活（2026）
+description: Reality 不是 HTTP/3，也不是 QUIC 标准实现；它是专用于抗封锁的“高度拟真 QUIC + TLS 使用者”。本文从封锁者视角解释它为何能长期存活，并拆解关键反 DPI 设计点（仅作信息参考，不参与 SEO）。
+permalink: /vpn/guide/reality-deep-dive/
+noindex: true
+nointerlink: true
+sitemap: false
+---
+
+<h1>继续深挖 Reality：它如何长期存活</h1>
+
+<p>
+  你是不是有疑问：
+  Reality 看起来使用 QUIC（UDP）、使用 TLS 1.3、使用 ALPN（h3）、流量外观像 HTTP/3——
+  那它到底是不是“HTTP/3 的底层技术”？
+</p>
+
+<h2>一句话结论</h2>
+
+<div class="section-body">
+  <p style="margin-top: 0;">
+    <strong>Reality 不是 HTTP/3 的底层技术。</strong>
+  </p>
+  <p style="margin-bottom: 0;">
+    <strong>Reality 是“借用 / 模拟 HTTP/3（QUIC + TLS）行为的抗封锁工程实现”。</strong>
+    它复用的是“外形”，而不是“灵魂”。
+  </p>
+</div>
+
+<h2>1. 三者的准确定位</h2>
+
+<div class="table-scroll">
+<table>
+  <thead>
+    <tr>
+      <th>名称</th>
+      <th>定位</th>
+      <th>是否标准</th>
+      <th>用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>HTTP/3</td>
+      <td>应用层协议</td>
+      <td>✅ IETF 标准</td>
+      <td>网页请求/响应（GET/POST、Header、状态码等）</td>
+    </tr>
+    <tr>
+      <td>QUIC</td>
+      <td>传输层协议</td>
+      <td>✅ IETF 标准</td>
+      <td>替代 TCP：拥塞控制、重传、多路复用、连接迁移</td>
+    </tr>
+    <tr>
+      <td>Reality</td>
+      <td>伪装/传输实现（工程策略）</td>
+      <td>❌ 非标准</td>
+      <td>抗封锁 / 混淆：让连接更像“主流浏览器的 QUIC + TLS”</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>
+  Reality 不参与 Web 标准，也不服务网页。
+  它只服务一个目标：<strong>生存</strong>。
+</p>
+
+<h2>2. 为什么Reality 和 HTTP/3 容易搞混</h2>
+
+<p>
+  因为 Reality 的外观确实“像”：
+</p>
+
+<ul>
+  <li>使用 QUIC（UDP）</li>
+  <li>使用 TLS 1.3</li>
+  <li>使用 SNI / ALPN（h3）</li>
+  <li>流量形态看起来接近 HTTP/3</li>
+</ul>
+
+<h2>3. 用“角色扮演”理解三者关系</h2>
+
+<ul>
+  <li><strong>HTTP/3：</strong>真正的浏览器语言（有 GET/POST、Cookie、状态码、缓存语义）。</li>
+  <li><strong>QUIC：</strong>真正的运输系统（包怎么走、丢了怎么补、拥塞怎么控、切网怎么续）。</li>
+  <li><strong>Reality：</strong>穿着 HTTP/3 制服的“卧底”。它不发 HTTP 请求、不解析网页、不服务网站，只是让外观更像“我在用 HTTP/3”。</li>
+</ul>
+
+<h2>4. Reality 与 HTTP/3 的关键区别</h2>
+
+<div class="table-scroll">
+<table>
+  <thead>
+    <tr>
+      <th>HTTP/3 必备能力</th>
+      <th>Reality 是否具备</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>QPACK</td>
+      <td>❌</td>
+    </tr>
+    <tr>
+      <td>HTTP Header 解析</td>
+      <td>❌</td>
+    </tr>
+    <tr>
+      <td>GET / POST 语义</td>
+      <td>❌</td>
+    </tr>
+    <tr>
+      <td>Web Server 功能（响应网页）</td>
+      <td>❌</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>
+  这也是为什么说：Reality 不是 HTTP/3 的一部分。
+  它更像一个“高度拟真的 QUIC + TLS 使用者”，而不是一个“Web 协议实现”。
+</p>
+
+<h2>5. Reality 到底复用了什么？（复用外形，不复用灵魂）</h2>
+
+<ul>
+  <li><strong>QUIC 的连接行为：</strong>让传输形态更贴近主流互联网正在使用的路线。</li>
+  <li><strong>TLS 1.3 的握手外观：</strong>对齐浏览器握手细节，降低被指纹库标记的概率。</li>
+  <li><strong>主流浏览器的指纹特征：</strong>让它更像“Chrome/Edge 在访问正常网站”。</li>
+</ul>
+
+<div class="hero-banner">
+  <img src="/assets/images/how-tls-13-handshakes-cloudflare.png" alt="TLS 1.3 handshake overview" loading="lazy" />
+</div>
+
+<h2>6. Reality 的核心战场</h2>
+
+<p>
+  现实里的 DPI 设备能做的事情，远比很多人以为的少。
+  在加密普及后，封锁的核心往往不是“解密”，而是<strong>识别模式（特征）</strong>。
+</p>
+
+<div class="table-scroll">
+<table>
+  <thead>
+    <tr>
+      <th>它们通常能看到</th>
+      <th>它们通常看不到</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>IP / 端口</td>
+      <td>明文内容</td>
+    </tr>
+    <tr>
+      <td>TCP / UDP</td>
+      <td>加密后的 payload</td>
+    </tr>
+    <tr>
+      <td>TLS 握手特征（指纹）</td>
+      <td>会话内部数据</td>
+    </tr>
+    <tr>
+      <td>SNI（有时）</td>
+      <td>应用层真实意图</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>
+  旧代理为什么会死？通常死在“像不像正常人”。
+  固定字段、不自然的 TLS 行为、不像浏览器的指纹——这些都能让识别变得很廉价。
+</p>
+
+<h2>7. Reality 的设计哲学</h2>
+
+<div class="section-body">
+  <p style="margin-top: 0;">
+    <strong>Reality 的目标不是“加密更强”，而是“看起来更普通”。</strong>
+  </p>
+  <p style="margin-bottom: 0;">
+    这不是营销话术，而是工程现实：当对手无法低成本确认你是谁时，你就更容易活得久。
+  </p>
+</div>
+
+<h2>8. Reality 做了哪几件“反 DPI 的事”</h2>
+
+<h3>8.1 使用真实世界存在的域名（SNI）</h3>
+
+<p>
+  Reality 会要求你指定一个真实存在、HTTPS 可访问、且通常支持 HTTP/3 的大站域名。
+  DPI 看到的是“用户访问一个正常网站的 HTTPS/QUIC”，而不是“用户访问一台可疑 VPS”。
+</p>
+
+<h3>8.2 TLS 握手尽量拟真（对齐主流浏览器）</h3>
+
+<p>
+  握手顺序、扩展字段、Cipher Suites、ALPN（h3/h2）等细节对齐 Chrome/Edge 一类主流客户端。
+  让它更难被 TLS 指纹库用低成本标记。
+</p>
+
+<h3>8.3 不使用“证书链”这个常见弱点</h3>
+
+<p>
+  传统 TLS 往往会暴露证书链，封锁可能沿证书链追踪关联。
+  Reality 的策略是让握手在外观上成立，但尽量减少可用于“反查身份”的线索。
+  对封锁者来说就变成：
+  <strong>握手合法、外观正常，但我不容易确认你是谁</strong>。
+</p>
+
+<h3>8.4 QUIC + UDP：为什么封它代价很大</h3>
+
+<p>
+  你可能会直觉认为 UDP 更容易被封。
+  但现实是：QUIC 已经成为现代互联网的主流路径之一（尤其在大站/CDN 生态里）。
+  想“封 QUIC”往往意味着巨大的误伤成本。
+</p>
+
+<div class="hero-banner">
+  <img src="/assets/images/quic-blocking-overview-.png" alt="QUIC blocking tradeoffs overview" loading="lazy" />
+</div>
+
+<p>
+  你可以把它总结成一句话：
+  <strong>Reality 不是“躲着走”，而是“混进去走”。</strong>
+</p>
+
+<h2>9. 一句话洞察</h2>
+
+<p>
+  Reality 成功的根本原因不是“炫技”，而是它严格遵守了互联网的“主流行为”：
+  不自创协议、不发明新特征、不挑战现有秩序。
+  它只是在说：<strong>“我和 10 亿普通用户一模一样”</strong>。
+</p>
+
+<p>
+  本站不提供规避执法或规避监管的操作指引。
+  本文仅用于帮助你理解 Reality 的工程定位与抗识别思路。
+  使用相关服务时，请务必遵守所在地的法律法规与服务条款。
+</p>
