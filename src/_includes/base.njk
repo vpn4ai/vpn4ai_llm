@@ -9,7 +9,6 @@
 {% set canonicalPath = page.url | stripLangPrefix %}
 {% set enReadyPaths = [
   '/',
-  '/vpn/recommend/',
   '/vpn/kb/',
   '/vpn/kb/open-source-vpn/',
   '/vpn/posts/',
@@ -30,7 +29,7 @@
   '/vpn/posts/atlas-review/'
 ] %}
 {% set hasEn = canonicalPath in enReadyPaths %}
-{% set isRecommendPage = canonicalPath == '/vpn/recommend/' %}
+{% set isRecommendPage = canonicalPath == '/' %}
 {% set isPostsListPage = canonicalPath == '/vpn/posts/' %}
 {% set isKbListPage = canonicalPath == '/vpn/kb/' %}
 {% set isReviewPage = (canonicalPath | slice(0, 11)) == '/vpn/posts/' and (canonicalPath | slice(-8)) == '-review/' %}
@@ -167,7 +166,7 @@
 
       {% if not nointerlink %}
         <nav class="nav">
-          <a class="btn" href="{{ '/vpn/recommend/' | withLangPrefix(langKey) }}">{{ navHome }}</a>
+          <a class="btn" href="{{ '/' | withLangPrefix(langKey) }}">{{ navHome }}</a>
           <a class="btn" href="{{ '/vpn/kb/' | withLangPrefix(langKey) }}">{{ navKb }}</a>
           <a class="btn" href="{{ '/vpn/posts/' | withLangPrefix(langKey) }}">{{ navPosts }}</a>
           <select id="lang-select" class="btn" style="max-width: 140px;">
@@ -202,7 +201,7 @@
           <div style="font-weight: 900;">{{ moreTitle }}</div>
           <div style="margin-top: 6px; color: rgba(0,0,0,0.75);">{{ moreDesc }}</div>
           <div class="cta-group" style="margin-bottom: 0;">
-            <a class="cta-primary" href="{{ '/vpn/recommend/' | withLangPrefix(langKey) }}">{{ moreRecommend }}</a>
+            <a class="cta-primary" href="{{ '/' | withLangPrefix(langKey) }}">{{ moreRecommend }}</a>
             <a class="cta-secondary" href="{{ '/vpn/posts/' | withLangPrefix(langKey) }}">{{ morePosts }}</a>
             <a class="cta-secondary" href="{{ '/vpn/review-methodology/' | withLangPrefix(langKey) }}">{{ moreMethod }}</a>
             <a class="cta-secondary" href="{{ '/vpn/kb/' | withLangPrefix(langKey) }}">{{ moreKb }}</a>
@@ -244,7 +243,7 @@
 
           <div class="site-footer-col">
             <div class="site-footer-links">
-              <a href="{{ '/vpn/recommend/' | withLangPrefix(langKey) }}">{{ footerVpnRecommend }}</a>
+              <a href="{{ '/' | withLangPrefix(langKey) }}">{{ footerVpnRecommend }}</a>
               <a href="{{ '/vpn/posts/' | withLangPrefix(langKey) }}">{{ footerReviews }}</a>
               <a href="https://www.vpn-china.org/" target="_blank" rel="nofollow">VPN中国</a>
             </div>
@@ -335,7 +334,7 @@
           }
 
           if (targetLang === "en" && !hasEn) {
-            basePath = "/vpn/recommend/";
+            basePath = "/";
           }
 
           var p = basePath;
